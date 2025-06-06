@@ -1,6 +1,6 @@
 {
   "name": "script-composer-sdk",
-  "version": "0.0.6",
+  "version": "0.1.0-beta.1",
   "description": "",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -34,7 +34,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.11.0",
   "peerDependencies": {
-    "@aptos-labs/script-composer-pack": "^0.0.9",
+    "@aptos-labs/script-composer-pack": "0.0.10-beta.2",
     "@aptos-labs/ts-sdk": "^2.0.1"
   },
   "devDependencies": {

@@ -13,7 +13,7 @@ export class AptosScriptComposer {
 
   private builder: TransactionComposer;
 
-  private static transactionComposer?: any;
+  private static transactionComposer?: typeof TransactionComposer;
 
   constructor(aptosConfig: AptosConfig) {
     this.config = aptosConfig;
@@ -38,14 +38,15 @@ export class AptosScriptComposer {
     const { moduleAddress, moduleName, functionName } = getFunctionParts(input.function);
     const module = input.module;
     const nodeUrl = this.config.getRequestUrl(AptosApiType.FULLNODE);
+    const apiKey = this.config.clientConfig?.API_KEY;
 
     // Load the calling module into the builder.
-    await this.builder.load_module(nodeUrl, `${moduleAddress}::${moduleName}`);
+    await this.builder.load_module(nodeUrl, apiKey || ""  ,`${moduleAddress}::${moduleName}`);
 
     // Load the calling type arguments into the loader.
     if (input.typeArguments !== undefined) {
       for (const typeArgument of input.typeArguments) {
-        await this.builder.load_type_tag(nodeUrl, typeArgument.toString());
+        await this.builder.load_type_tag(nodeUrl, apiKey || "", typeArgument.toString());
       }
     }
     const typeArguments = standardizeTypeTags(input.typeArguments);
